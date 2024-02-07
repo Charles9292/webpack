@@ -1,6 +1,6 @@
-const path = require('path');
-const EslintPlugin = require('eslint-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const EslintPlugin = require('eslint-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const getStyleLoaders = (preProcessor) => {
   return [
@@ -64,15 +64,21 @@ module.exports = {
         test: /\.(ts|tsx|js)$/,
         include: path.resolve(__dirname, '../src'),
         use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-              cacheCompression: false,
-              presets: ['@babel/preset-env']
-            },
-          },
           path.resolve(__dirname, './loaders/clean-log.js'),
+          {
+            loader: path.resolve(__dirname, './loaders/babel-loader'),
+            options: {
+              presets: ['@babel/preset-env'],
+            }
+          },
+          // {
+          //   loader: 'babel-loader',
+          //   options: {
+          //     cacheDirectory: true,
+          //     cacheCompression: false,
+          //     presets: ['@babel/preset-env']
+          //   },
+          // },
         ]
       },
     ]
