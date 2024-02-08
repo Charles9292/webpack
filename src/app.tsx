@@ -1,7 +1,11 @@
 import React from 'react'
+import Home from './pages/home'
 
 export default function app() {
   return (
-    <div>app</div>
+    <>
+      <div>App</div>
+      <Home />
+    </>
   )
 }
