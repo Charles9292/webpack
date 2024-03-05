@@ -2,6 +2,7 @@ const path = require('path')
 const EslintPlugin = require('eslint-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const getStyleLoaders = (preProcessor) => {
   return [
@@ -99,7 +100,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename:'static/css/[name].css',
       chunkFilename:'static/css/[name].chunk.css',
-    })
+    }),
+    new CssMinimizerPlugin(),
   ],
   mode: 'production',
   devtool: 'cheap-module-source-map',
