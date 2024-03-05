@@ -1,10 +1,11 @@
 const path = require('path')
 const EslintPlugin = require('eslint-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const getStyleLoaders = (preProcessor) => {
   return [
-    'style-loader', 
+    MiniCssExtractPlugin.loader, 
     'css-loader', 
     {
       /* -------------- 处理css兼容性问题，配合package.json中的browsersList来指定兼容性 ------------- */
@@ -20,9 +21,9 @@ const getStyleLoaders = (preProcessor) => {
 }
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './src/main.js', // 相对路径
   output: {
-    path: undefined,
+    path: path.resolve(__dirname, '../dist'), // 绝对路径
     filename: 'static/js/[name].js',
     chunkFilename: 'static/js/[name].chunk.js',
     assetModuleFilename: 'static/media/[hash:10][ext][query]',
@@ -94,9 +95,13 @@ module.exports = {
       template: './public/index.html',
       filename: 'index.html',
       favicon: './public/favicon.ico',
+    }),
+    new MiniCssExtractPlugin({
+      filename:'static/css/[name].css',
+      chunkFilename:'static/css/[name].chunk.css',
     })
   ],
-  mode: 'development',
+  mode: 'production',
   devtool: 'cheap-module-source-map',
   optimization: {
     splitChunks: {
@@ -111,11 +116,5 @@ module.exports = {
   },
   resolveLoader: {
     modules: ['node_modules', path.resolve(__dirname, './loaders')],
-  },
-  devServer: {
-    host: 'localhost',
-    port: 3000,
-    open: true,
-    hot: true,
   },
 }

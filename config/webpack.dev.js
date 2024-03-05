@@ -22,11 +22,11 @@ const getStyleLoaders = (preProcessor) => {
 module.exports = {
   entry: './src/main.js',
   output: {
+    // 开发模式没有输出
     path: undefined,
     filename: 'static/js/[name].js',
     chunkFilename: 'static/js/[name].chunk.js',
     assetModuleFilename: 'static/media/[hash:10][ext][query]',
-    clean: true,
   },
   module: {
     rules: [
@@ -57,8 +57,11 @@ module.exports = {
         }
       },
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        test: /\.(woff2?|eot|ttf|otf|map3|map4|avi)(\?.*)?$/,
         type: 'asset/resource',
+        generator: {
+          filename: 'static/fonts/[hash:10][ext][query]'
+        }
       },
       {
         test: /\.(ts|tsx|js)$/,
@@ -66,11 +69,11 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-              cacheCompression: false,
-              presets: ['@babel/preset-env']
-            },
+            // options: {
+            //   cacheDirectory: true,
+            //   cacheCompression: false,
+            //   presets: ['@babel/preset-env']
+            // },
           },
           path.resolve(__dirname, './loaders/clean-log.js'),
         ]
