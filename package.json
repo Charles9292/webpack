@@ -6,7 +6,8 @@
   "scripts": {
     "start": "pnpm run dev",
     "dev": "cross-env NODE_ENV=development webpack server --config config/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js"
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
+    "debug": "cross-evn NODE_ENV=development node --inspect-brk ./node-modules/webpack-cli/bin/cli.js -c ./config/webpack.dev.js"
   },
   "author": "charles",
   "license": "ISC",
