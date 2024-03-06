@@ -94,7 +94,7 @@ module.exports = {
     })
   ],
   mode: 'development',
-  devtool: 'cheap-module-source-map',
+  devtool: 'cheap-module-source-map', // 提示错误到行
   optimization: {
     splitChunks: {
       chunks: 'all',

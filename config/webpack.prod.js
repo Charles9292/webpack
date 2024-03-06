@@ -104,7 +104,7 @@ module.exports = {
     new CssMinimizerPlugin(),
   ],
   mode: 'production',
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map', // 提示错误到行列
   optimization: {
     splitChunks: {
       chunks: 'all',
