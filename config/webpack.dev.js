@@ -1,6 +1,10 @@
 const path = require('path');
+const os = require('os')
 const EslintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+/* ---------------------------------- cpu核数 --------------------------------- */
+const threads = os.cpus().length
 
 const getStyleLoaders = (preProcessor) => {
   return [
@@ -70,6 +74,12 @@ module.exports = {
             include: path.resolve(__dirname, '../src'),
             use: [
               {
+                loader: 'thread-loader',
+                options: {
+                  works: threads,
+                }
+              },
+              {
                 loader: 'babel-loader',
                 // options: {
                 //   cacheDirectory: true,
@@ -90,12 +100,13 @@ module.exports = {
       exclude: ['node_modules'],
       cache: true,
       cacheLocation: path.resolve(__dirname, '../node_modules/.cache/.eslintcache'),
+      threads,
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',
       favicon: './public/favicon.ico',
-    })
+    }),
   ],
   mode: 'development',
   devtool: 'cheap-module-source-map', // 提示错误到行

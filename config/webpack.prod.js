@@ -1,8 +1,13 @@
 const path = require('path')
+const os = require('os')
 const EslintPlugin = require('eslint-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
+
+/* ---------------------------------- cpu核数 --------------------------------- */
+const threads = os.cpus().length
 
 const getStyleLoaders = (preProcessor) => {
   return [
@@ -68,6 +73,12 @@ module.exports = {
             test: /\.(ts|tsx|js)$/,
             include: path.resolve(__dirname, '../src'),
             use: [
+              {
+                loader: 'thread-loader',
+                options: {
+                  works: threads,
+                }
+              },
               path.resolve(__dirname, './loaders/clean-log.js'),
               {
                 loader: path.resolve(__dirname, './loaders/babel-loader'),
@@ -95,6 +106,7 @@ module.exports = {
       exclude: ['node_modules'],
       cache: true,
       cacheLocation: path.resolve(__dirname, '../node_modules/.cache/.eslintcache'),
+      threads, // 开启多进程和设置进程数量
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
@@ -105,7 +117,6 @@ module.exports = {
       filename:'static/css/[name].css',
       chunkFilename:'static/css/[name].chunk.css',
     }),
-    new CssMinimizerPlugin(),
   ],
   mode: 'production',
   devtool: 'source-map', // 提示错误到行列
@@ -116,6 +127,12 @@ module.exports = {
     runtimeChunk: {
       name: entrypoint => `runtime~${entrypoint.name}.js`
     },
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserWebpackPlugin({
+        parallel: threads, // 开启多进程和设置进程数量
+      })
+    ]
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.tsx', '.ts'],
