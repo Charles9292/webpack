@@ -32,57 +32,61 @@ module.exports = {
   },
   module: {
     rules: [
-      // 处理css
       {
-        test: /\.css$/,
-        use: getStyleLoaders(),
-      },
-      {
-        test: /\.less$/i,
-        use: getStyleLoaders('less-loader'),
-      },
-      {
-        test: /\.s[ac]ss$/,
-        use: getStyleLoaders('sass-loader'),
-      },
-      {
-        test: /\.styl$/,
-        use: getStyleLoaders('stylus-loader'),
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg|webp)(\?.*)?$/,
-        type: 'asset',
-        parser: {
-          dataUrlCondition: {
-            maxSize: 10 * 1024 // 10kb
-          }
-        }
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.(ts|tsx|js)$/,
-        include: path.resolve(__dirname, '../src'),
-        use: [
-          path.resolve(__dirname, './loaders/clean-log.js'),
+        oneOf: [
+          // 处理css
           {
-            loader: path.resolve(__dirname, './loaders/babel-loader'),
-            options: {
-              presets: ['@babel/preset-env'],
+            test: /\.css$/,
+            use: getStyleLoaders(),
+          },
+          {
+            test: /\.less$/i,
+            use: getStyleLoaders('less-loader'),
+          },
+          {
+            test: /\.s[ac]ss$/,
+            use: getStyleLoaders('sass-loader'),
+          },
+          {
+            test: /\.styl$/,
+            use: getStyleLoaders('stylus-loader'),
+          },
+          {
+            test: /\.(png|jpe?g|gif|svg|webp)(\?.*)?$/,
+            type: 'asset',
+            parser: {
+              dataUrlCondition: {
+                maxSize: 10 * 1024 // 10kb
+              }
             }
           },
-          // {
-          //   loader: 'babel-loader',
-          //   options: {
-          //     cacheDirectory: true,
-          //     cacheCompression: false,
-          //     presets: ['@babel/preset-env']
-          //   },
-          // },
+          {
+            test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+            type: 'asset/resource',
+          },
+          {
+            test: /\.(ts|tsx|js)$/,
+            include: path.resolve(__dirname, '../src'),
+            use: [
+              path.resolve(__dirname, './loaders/clean-log.js'),
+              {
+                loader: path.resolve(__dirname, './loaders/babel-loader'),
+                options: {
+                  presets: ['@babel/preset-env'],
+                }
+              },
+              // {
+              //   loader: 'babel-loader',
+              //   options: {
+              //     cacheDirectory: true,
+              //     cacheCompression: false,
+              //     presets: ['@babel/preset-env']
+              //   },
+              // },
+            ]
+          },
         ]
-      },
+      }
     ]
   },
   plugins: [

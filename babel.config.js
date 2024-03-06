@@ -3,5 +3,6 @@ module.exports = {
   presets: [
     // ["react-app", { "flow": false, "typescript": true }]
     '@babel/preset-env', '@babel/preset-react'
-  ]
+  ],
+  plugins: ['react-hot-loader/babel'],
 }

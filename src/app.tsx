@@ -1,11 +1,14 @@
 import React from 'react'
+import { hot } from 'react-hot-loader/root'
 import Home from './pages/home'
 
-export default function app() {
+function App() {
   return (
     <>
-      <div>App</div>
+      <div>App1</div>
       <Home />
     </>
   )
 }
+
+export default hot(App)
