@@ -7,6 +7,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const { extendDefaultPlugins } = require('svgo');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 /* ---------------------------------- cpu核数 --------------------------------- */
 const threads = os.cpus().length
@@ -34,7 +35,7 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'), // 绝对路径
     filename: 'static/js/[name].js',
     chunkFilename: 'static/js/[name].chunk.js',
-    
+
     /* -------------------------- 图片字体通过type：asset处理的资源 ------------------------- */
     assetModuleFilename: 'static/media/[hash:10][ext][query]',
     clean: true,
@@ -109,6 +110,11 @@ module.exports = {
       filename:'static/css/[name].css',
       chunkFilename:'static/css/[name].chunk.css',
     }),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      as: 'script',
+      // rel: 'prefetch',
+    })
   ],
   mode: 'production',
   devtool: 'source-map', // 提示错误到行列
