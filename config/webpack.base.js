@@ -67,11 +67,7 @@ module.exports = {
         include: path.resolve(__dirname, '../src'),
         use: [
           {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-              cacheCompression: false,
-            },
+            loader: path.resolve(__dirname, './loaders/babel-loader'),
           },
           path.resolve(__dirname, '../loaders/clean-log.js')
         ],
