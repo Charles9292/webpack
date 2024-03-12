@@ -81,11 +81,6 @@ module.exports = {
               },
               {
                 loader: 'babel-loader',
-                // options: {
-                //   cacheDirectory: true,
-                //   cacheCompression: false,
-                //   presets: ['@babel/preset-env']
-                // },
               },
               path.resolve(__dirname, './loaders/clean-log.js'),
             ]
