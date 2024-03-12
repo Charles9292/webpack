@@ -30,6 +30,8 @@ module.exports = {
     path: undefined,
     filename: 'static/js/[name].js',
     chunkFilename: 'static/js/[name].chunk.js',
+
+    /* -------------------------- 图片字体通过type：asset处理的资源 ------------------------- */
     assetModuleFilename: 'static/media/[hash:10][ext][query]',
   },
   module: {
@@ -64,10 +66,7 @@ module.exports = {
           },
           {
             test: /\.(woff2?|eot|ttf|otf|map3|map4|avi)(\?.*)?$/,
-            type: 'asset/resource',
-            generator: {
-              filename: 'static/fonts/[hash:10][ext][query]'
-            }
+            type: 'asset/resource'
           },
           {
             test: /\.(ts|tsx|js)$/,

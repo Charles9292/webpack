@@ -34,6 +34,8 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'), // 绝对路径
     filename: 'static/js/[name].js',
     chunkFilename: 'static/js/[name].chunk.js',
+    
+    /* -------------------------- 图片字体通过type：asset处理的资源 ------------------------- */
     assetModuleFilename: 'static/media/[hash:10][ext][query]',
     clean: true,
   },
