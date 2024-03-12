@@ -7,7 +7,7 @@ function App() {
     <>
       <div>App1</div>
       {
-        import('./pages/home').then(module => {
+        import(/* webpackChunkName: "home" */'./pages/home').then(module => {
           const Home = module.default
           return <Home />
         })
