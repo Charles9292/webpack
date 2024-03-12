@@ -81,18 +81,13 @@ module.exports = {
                   works: threads,
                 }
               },
-              path.resolve(__dirname, './loaders/clean-log.js'),
-              {
-                loader: path.resolve(__dirname, './loaders/babel-loader'),
-              },
+              // path.resolve(__dirname, './loaders/clean-log.js'),
               // {
-              //   loader: 'babel-loader',
-              //   options: {
-              //     cacheDirectory: true,
-              //     cacheCompression: false,
-              //     presets: ['@babel/preset-env']
-              //   },
+              //   loader: path.resolve(__dirname, './loaders/babel-loader'),
               // },
+              {
+                loader: 'babel-loader',
+              },
             ]
           },
         ]

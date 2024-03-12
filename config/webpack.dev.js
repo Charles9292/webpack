@@ -82,7 +82,6 @@ module.exports = {
               {
                 loader: 'babel-loader',
               },
-              path.resolve(__dirname, './loaders/clean-log.js'),
             ]
           },
         ]
