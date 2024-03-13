@@ -107,8 +107,8 @@ module.exports = {
       favicon: './public/favicon.ico',
     }),
     new MiniCssExtractPlugin({
-      filename:'static/css/[name].css',
-      chunkFilename:'static/css/[name].chunk.css',
+      filename:'static/css/[name].[contenthash:10].css',
+      chunkFilename:'static/css/[name].chunk.[contenthash:10].css',
     }),
     new PreloadWebpackPlugin({
       rel: 'preload',
